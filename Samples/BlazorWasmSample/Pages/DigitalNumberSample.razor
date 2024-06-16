@@ -1,0 +1,116 @@
+﻿@page "/digital/number"
+@inject IJSRuntime JS
+@inject IServiceProvider serviceProvider
+@inject ILoggerFactory loggerFactory
+
+<PageTitle>Digital Number - Vagabond K's Indicators</PageTitle>
+
+
+@* 공유 세그먼트 정의 *@
+<SharedDigitalFontSegments DigitalFont="@font"/>
+
+
+<SectionContent SectionName="AppBarContent">
+    <MudSwitch @bind-Value="@glowEffect" Label="Glow Effect" />
+    <MudButton Color="Color.Dark" EndIcon="@Icons.Material.Filled.SaveAlt" Variant="Variant.Filled" @onclick="ExportToSVG"><MudText>Export to SVG</MudText></MudButton>
+</SectionContent>
+
+
+<div style="display:flex;justify-content:center;align-items:center;height:250px;">
+    <DigitalNumber @ref="digitalNumber" Style="border-color:#404040;border-width:1px;border-style: dashed;" DigitalFont="@font" UseSharedSegments="true" Value="@value" ActiveStyle="@ActiveStyle" IntegerDigits="@integerDigits" DecimalPlaces="@decimalPlaces" DecimalSeparatorSize="@decimalSeparatorSize" DecimalPlaceScale="@decimalPlaceScale" Spacing="@spacing">
+        <SvgDefs>
+            @if (glowEffect)
+            {
+                <filter id="glowEffect" height="300%" width="300%" x="-75%" y="-75%">
+                    <feMorphology operator="dilate" radius="@(font.Size/40)" in="SourceGraphic" result="thicken" />
+                    <feGaussianBlur in="thicken" stdDeviation="@(font.Size/20)" result="blurred" />
+                    <feFlood flood-color="rgb(255,255,255)" result="white" />
+                    <feComposite in="white" in2="SourceAlpha" operator="in" result="whiteColored" />
+                    <feMerge>
+                        <feMergeNode in="blurred" />
+                        <feMergeNode in="whiteColored" />
+                    </feMerge>
+                </filter>
+            }
+        </SvgDefs>
+    </DigitalNumber>
+</div>
+
+
+<MudCard Class="mt-5">
+    <MudCardContent>
+        <MudGrid>
+            <MudItem xs="6"><MudSlider @bind-Value="integerDigits" TickMarks="true" Min="0" Max="29">Integer Digits: @integerDigits</MudSlider></MudItem>
+            <MudItem xs="3"><MudSlider @bind-Value="value" Min="-999" Max="1000" Step="0.0000000000000000000000000001">Value: @value.ToString("#0.###")</MudSlider></MudItem>
+            <MudItem xs="3"><MudNumericField @bind-Value="value" Min="-999" Max="1000" Label="Value" Variant="Variant.Filled" Immediate="true" /></MudItem>
+            <MudItem xs="6"><MudSlider @bind-Value="decimalPlaces" TickMarks="true" Min="0" Max="28">Decimal Places: @decimalPlaces</MudSlider></MudItem>
+            <MudItem xs="6"><MudSlider @bind-Value="decimalPlaceScale" Min="0" Max="1" Step="0.001">Decimal Place Scale: @decimalPlaceScale.ToString("P1")</MudSlider></MudItem>
+            <MudItem xs="6"><MudSlider @bind-Value="decimalSeparatorSize" Min="0" Max="1" Step="0.001">Decimal Separator Size: @decimalSeparatorSize.ToString("P1")</MudSlider></MudItem>
+            <MudItem xs="6"><MudSlider @bind-Value="spacing" Min="0" Max="1" Step="0.001">Spacing: @spacing.ToString("P1")</MudSlider></MudItem>
+            <MudItem xs="6"><MudSlider @bind-Value="font.Thickness" Min="0" Max="1" Step="0.001">Thickness: @font.Thickness.ToString("P1")</MudSlider></MudItem>
+            <MudItem xs="6"><MudSlider @bind-Value="font.Gap" Min="0" Max="1" Step="0.001">Gap: @font.Gap.ToString("P1")</MudSlider></MudItem>
+            <MudItem xs="6"><MudSlider @bind-Value="font.CornerChamfer" Min="0" Max="1" Step="0.001">Corner Chamfer: @font.CornerChamfer.ToString("P1")</MudSlider></MudItem>
+            <MudItem xs="6"><MudSlider @bind-Value="font.MiddleChamfer" Min="0" Max="1" Step="0.001">Middle Chamfer: @font.MiddleChamfer.ToString("P1")</MudSlider></MudItem>
+            <MudItem xs="6"><MudSlider @bind-Value="font.SlantAngle" Min="0" Max="50" Step="0.001">Slant Angle: @($"{font.SlantAngle:#0.###}°")</MudSlider></MudItem>
+            <MudItem xs="6"><MudSlider @bind-Value="font.WidthRatio" Min="0" Max="2" Step="0.001">Width Ratio: @font.WidthRatio.ToString("P1")</MudSlider></MudItem>
+            <MudItem xs="6"><MudSlider @bind-Value="font.CornerGapWarping" Min="0" Max="1" Step="0.001">Corner Gap Warping: @font.CornerGapWarping.ToString("P1")</MudSlider></MudItem>
+            <MudItem xs="6"><MudSlider @bind-Value="font.Size" Min="0" Max="200" Step="0.001">Size: @($"{font.Size:#0.###}px")</MudSlider></MudItem>
+        </MudGrid>
+    </MudCardContent>
+</MudCard>
+
+<script>
+    window.downloadFileFromStream = async (fileName, contentStreamReference) => {
+        const arrayBuffer = await contentStreamReference.arrayBuffer();
+        const blob = new Blob([arrayBuffer]);
+        const url = URL.createObjectURL(blob);
+        const anchorElement = document.createElement('a');
+        anchorElement.href = url;
+        anchorElement.download = fileName ?? '';
+        anchorElement.click();
+        anchorElement.remove();
+        URL.revokeObjectURL(url);
+    }
+</script>
+
+@code {
+    private DigitalNumber digitalNumber = new();
+    private SevenSegmentFont font = new SevenSegmentFont() { Size = 100, SlantAngle = 10 };
+
+    bool glowEffect = false;
+    private double value = -999;
+    private int integerDigits = 5;
+    private int decimalPlaces = 2;
+    private double decimalSeparatorSize = 0.1;
+    private double decimalPlaceScale = 0.8;
+    private double spacing = 0.2;
+    private string ActiveStyle => glowEffect ? "fill:cyan;filter:url(#glowEffect)" : "fill:cyan;";
+
+    private async Task ExportToSVG()
+    {
+        await using var htmlRenderer = new HtmlRenderer(serviceProvider, loggerFactory);
+        var svg = await htmlRenderer.Dispatcher.InvokeAsync(async () =>
+        {
+            var dictionary = new Dictionary<string, object?>
+            {
+                { nameof(digitalNumber.Value), value },
+                { nameof(digitalNumber.DigitalFont), font },
+                { nameof(digitalNumber.IntegerDigits), integerDigits },
+                { nameof(digitalNumber.DecimalPlaces), decimalPlaces },
+                { nameof(digitalNumber.DecimalPlaceScale), decimalPlaceScale },
+                { nameof(digitalNumber.Spacing), spacing },
+                { nameof(digitalNumber.ActiveStyle), ActiveStyle },
+                { nameof(digitalNumber.SvgDefs), digitalNumber.SvgDefs },
+            };
+            var parameters = ParameterView.FromDictionary(dictionary);
+            var output = await htmlRenderer.RenderComponentAsync<DigitalNumber>(parameters);
+
+            return "<?xml version=\"1.0\" encoding=\"utf-8\"?>" + output.ToHtmlString();
+        });
+
+        var stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(svg));
+        var fileName = "DigitalNumber.svg";
+        using var streamRef = new DotNetStreamReference(stream: stream);
+        await JS.InvokeVoidAsync("downloadFileFromStream", fileName, streamRef);
+    }
+}

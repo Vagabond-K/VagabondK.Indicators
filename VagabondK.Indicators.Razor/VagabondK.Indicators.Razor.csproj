@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\VagabondK.Indicators.Razor.xml</DocumentationFile>
+    <Company>Vagabond K</Company>
+    <Authors>Vagabond K</Authors>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageIcon>nugetIcon.png</PackageIcon>
+    <PackageLicenseExpression>LGPL-2.1-only</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/Vagabond-K/VagabondK.Indicators/tree/master/VagabondK.Indicators.Razor</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Description>데이터를 화면에 표시하기 위한 Razor 컴포넌트 기반 인디케이터 관련 라이브러리입니다.</Description>
+    <Version>1.0.0</Version>
+    <PackageProjectUrl>https://github.com/Vagabond-K/VagabondK.Indicators/tree/master/VagabondK.Indicators.Razor</PackageProjectUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\nugetIcon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.28" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VagabondK.Indicators\VagabondK.Indicators.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<vki:DigitalIndicator
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vki="clr-namespace:VagabondK.Indicators.Maui"
+    x:Class="VagabondK.Indicators.Maui.DigitalText">
+    <TemplatedView.ControlTemplate>
+        <ControlTemplate>
+            <Grid Background="{TemplateBinding Background}" Margin="{TemplateBinding Padding}">
+                <vki:DigitalTextPresenter
+                    Value="{TemplateBinding Value}"
+                    DigitalFont="{TemplateBinding DigitalFont}"
+                    Length="{TemplateBinding Length}"
+                    Format="{TemplateBinding Format}"
+                    SegmentFilter="InactiveOnly"
+                    Fill="{TemplateBinding Inactive}"
+                    Stroke="{TemplateBinding InactiveStroke}"
+                    StrokeThickness="{TemplateBinding StrokeThickness}"
+                    StrokeLineCap="{TemplateBinding StrokeLineCap}"
+                    StrokeLineJoin="{TemplateBinding StrokeLineJoin}"
+                    StrokeMiterLimit="{TemplateBinding StrokeMiterLimit}"
+                    StrokeDashOffset="{TemplateBinding StrokeDashOffset}"
+                    StrokeDashArray="{TemplateBinding StrokeDashArray}"
+                    Spacing="{TemplateBinding Spacing}"
+                    Aspect="{TemplateBinding Aspect}"/>
+                <vki:DigitalTextPresenter
+                    Value="{TemplateBinding Value}"
+                    DigitalFont="{TemplateBinding DigitalFont}"
+                    Length="{TemplateBinding Length}"
+                    Format="{TemplateBinding Format}"
+                    Fill="{TemplateBinding Active}"
+                    Stroke="{TemplateBinding ActiveStroke}"
+                    StrokeThickness="{TemplateBinding StrokeThickness}"
+                    StrokeLineCap="{TemplateBinding StrokeLineCap}"
+                    StrokeLineJoin="{TemplateBinding StrokeLineJoin}"
+                    StrokeMiterLimit="{TemplateBinding StrokeMiterLimit}"
+                    StrokeDashOffset="{TemplateBinding StrokeDashOffset}"
+                    StrokeDashArray="{TemplateBinding StrokeDashArray}"
+                    Spacing="{TemplateBinding Spacing}"
+                    Aspect="{TemplateBinding Aspect}"/>
+            </Grid>
+        </ControlTemplate>
+    </TemplatedView.ControlTemplate>
+</vki:DigitalIndicator>

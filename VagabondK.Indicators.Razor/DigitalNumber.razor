@@ -1,0 +1,40 @@
+﻿@inherits DigitalIndicator
+<svg class="vki-digital-number @Class" style="@Style" width="@Size.Width" height="@Size.Height" viewBox="0 0 @Size.Width @Size.Height" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        @SvgDefs
+    </defs>
+    <g style="color:#808080;fill-opacity:0.25;">
+        <DigitalNumberPresenter
+            Class="@InactiveClass"
+            Style="@InactiveStyle"
+            Value="@Value"
+            Spacing="@Spacing"
+            DigitalFont="@DigitalFont"
+            IntegerDigits="@IntegerDigits"
+            DecimalPlaces="@DecimalPlaces"
+            DecimalPlaceScale="@DecimalPlaceScale"
+            DecimalSeparatorSize="@DecimalSeparatorSize"
+            PadZeroLeft="@PadZeroLeft"
+            PadZeroRight="@PadZeroRight"
+            MinusAlignLeft="@MinusAlignLeft"
+            UseSharedSegments="@UseSharedSegments"
+            SegmentFilter="@(RenderAllInactive ? DigitalFonts.DigitalSegmentFilter.All : DigitalFonts.DigitalSegmentFilter.InactiveOnly)" />
+    </g>
+    <g>
+        <DigitalNumberPresenter
+            Class="@ActiveClass"
+            Style="@ActiveStyle"
+            Value="@Value"
+            Spacing="@Spacing"
+            DigitalFont="@DigitalFont" 
+            IntegerDigits="@IntegerDigits"
+            DecimalPlaces="@DecimalPlaces"
+            DecimalPlaceScale="@DecimalPlaceScale"
+            DecimalSeparatorSize="@DecimalSeparatorSize"
+            PadZeroLeft="@PadZeroLeft"
+            PadZeroRight="@PadZeroRight"
+            MinusAlignLeft="@MinusAlignLeft"
+            UseSharedSegments="true"
+            SegmentFilter="@DigitalFonts.DigitalSegmentFilter.ActiveOnly" />
+    </g>
+</svg>

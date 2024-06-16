@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CS0067: 'DigitalIndicatorExporter.ExportToSvgCommand.CanExecuteChanged' 이벤트가 사용되지 않았습니다.
+dotnet_diagnostic.CS0067.severity = none

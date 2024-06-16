@@ -1,0 +1,22 @@
+﻿<svg class="vki-digital-presenter @Class" style="fill:currentColor;@Style" width="@Size.Width" height="@Size.Height" viewBox="0 0 @Size.Width @Size.Height" xmlns="http://www.w3.org/2000/svg">
+    @if (!UseSharedSegments)
+    {
+        <defs>
+            @for (int i = 0; i < segmentPaths.Count; i++)
+            {
+                <path id="@(segmentIdPrefix + i)" d="@segmentPaths[i]"/>
+            }
+            @SvgDefs
+        </defs>
+    }
+    <g class="@defaultClassName">
+        @foreach (var item in segmentDrawings)
+        {
+            <use href="#@item.Value" transform="matrix(@item.Transform.M11 @item.Transform.M12 @item.Transform.M21 @item.Transform.M22 @item.Transform.M31 @item.Transform.M32)" />
+        }
+        @foreach (var item in customDrawings)
+        {
+            <path d="@item.Value" transform="matrix(@item.Transform.M11 @item.Transform.M12 @item.Transform.M21 @item.Transform.M22 @item.Transform.M31 @item.Transform.M32)" />
+        }
+    </g>
+</svg>

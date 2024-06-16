@@ -1,0 +1,29 @@
+﻿@inherits DigitalIndicator
+<svg class="vki-digital-text @Class" style="@Style" width="@Size.Width" height="@Size.Height" viewBox="0 0 @Size.Width @Size.Height" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        @SvgDefs
+    </defs>
+    <g style="color:#808080;fill-opacity:0.25;">
+        <DigitalTextPresenter
+            Class="@InactiveClass"
+            Style="@InactiveStyle"
+            Value="@Value"
+            Spacing="@Spacing"
+            DigitalFont="@DigitalFont"
+            Length="@Length"
+            Format="@Format"
+            UseSharedSegments="@UseSharedSegments"
+            SegmentFilter="@(RenderAllInactive ? DigitalFonts.DigitalSegmentFilter.All : DigitalFonts.DigitalSegmentFilter.InactiveOnly)" />
+    </g>
+    <g>
+        <DigitalTextPresenter Class="@ActiveClass"
+            Style="@ActiveStyle"
+            Value="@Value"
+            Spacing="@Spacing"
+            DigitalFont="@DigitalFont" 
+            Length="@Length"
+            Format="@Format"
+            UseSharedSegments="true"
+            SegmentFilter="@DigitalFonts.DigitalSegmentFilter.ActiveOnly" />
+    </g>
+</svg>

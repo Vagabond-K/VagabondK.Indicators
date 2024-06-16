@@ -1,0 +1,312 @@
+<UserControl
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:vki="http://schemas.vagabond-k.com/avaloniaui/indicators"
+  xmlns:vkid="using:VagabondK.Indicators.DigitalFonts"
+  xmlns:vm="clr-namespace:AvaloniaSample.ViewModels"
+  mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="800"
+  x:Class="AvaloniaSample.Views.MainView"
+  x:DataType="vm:MainViewModel">
+  <Design.DataContext>
+    <!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+    <vm:MainViewModel />
+  </Design.DataContext>
+  <UserControl.Styles>
+    <Style Selector="CheckBox">
+      <Setter Property="HorizontalAlignment" Value="Right"/>
+      <Setter Property="VerticalAlignment" Value="Bottom"/>
+      <Setter Property="Margin" Value="10"/>
+    </Style>
+    <Style Selector="Slider">
+      <Setter Property="Margin" Value="0,-10"/>
+    </Style>
+    <Style Selector="HeaderedContentControl">
+      <Setter Property="Margin" Value="10"/>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <StackPanel>
+            <TextBlock Text="{TemplateBinding Header}"/>
+            <ContentPresenter Content="{TemplateBinding Content}"/>
+          </StackPanel>
+        </ControlTemplate>
+      </Setter>
+    </Style>
+    <Style Selector="vki|DigitalNumber.Glow">
+      <Setter Property="ClipToBounds" Value="False"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type vki:DigitalNumber}">
+            <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}">
+              <Grid Margin="{TemplateBinding Padding}">
+                <vki:DigitalNumberPresenter
+                    Value="{TemplateBinding Value}"
+                    DigitalFont="{TemplateBinding DigitalFont}"
+                    SegmentFilter="InactiveOnly"
+                    Fill="{TemplateBinding Inactive}"
+                    Stroke="{TemplateBinding InactiveStroke}"
+                    StrokeThickness="{TemplateBinding StrokeThickness}"
+                    StrokeLineCap="{TemplateBinding StrokeLineCap}"
+                    StrokeJoin="{TemplateBinding StrokeJoin}"
+                    StrokeDashOffset="{TemplateBinding StrokeDashOffset}"
+                    StrokeDashArray="{TemplateBinding StrokeDashArray}"
+                    Spacing="{TemplateBinding Spacing}"
+                    IntegerDigits="{TemplateBinding IntegerDigits}"
+                    DecimalPlaces="{TemplateBinding DecimalPlaces}"
+                    DecimalSeparatorSize="{TemplateBinding DecimalSeparatorSize}"
+                    DecimalPlaceScale="{TemplateBinding DecimalPlaceScale}"
+                    PadZeroLeft="{TemplateBinding PadZeroLeft}"
+                    PadZeroRight="{TemplateBinding PadZeroRight}"
+                    MinusAlignLeft="{TemplateBinding MinusAlignLeft}"/>
+                <vki:DigitalNumberPresenter
+                    Value="{TemplateBinding Value}"
+                    DigitalFont="{TemplateBinding DigitalFont}"
+                    Fill="{TemplateBinding Active}"
+                    Stroke="{TemplateBinding Active}"
+                    StrokeThickness="5"
+                    StrokeLineCap="{TemplateBinding StrokeLineCap}"
+                    StrokeJoin="{TemplateBinding StrokeJoin}"
+                    StrokeDashOffset="{TemplateBinding StrokeDashOffset}"
+                    StrokeDashArray="{TemplateBinding StrokeDashArray}"
+                    Spacing="{TemplateBinding Spacing}"
+                    IntegerDigits="{TemplateBinding IntegerDigits}"
+                    DecimalPlaces="{TemplateBinding DecimalPlaces}"
+                    DecimalSeparatorSize="{TemplateBinding DecimalSeparatorSize}"
+                    DecimalPlaceScale="{TemplateBinding DecimalPlaceScale}"
+                    PadZeroLeft="{TemplateBinding PadZeroLeft}"
+                    PadZeroRight="{TemplateBinding PadZeroRight}"
+                    MinusAlignLeft="{TemplateBinding MinusAlignLeft}">
+                  <vki:DigitalNumberPresenter.Effect>
+                    <BlurEffect Radius="10"/>
+                  </vki:DigitalNumberPresenter.Effect>
+                </vki:DigitalNumberPresenter>
+                <vki:DigitalNumberPresenter
+                    Value="{TemplateBinding Value}"
+                    DigitalFont="{TemplateBinding DigitalFont}"
+                    Fill="White"
+                    Stroke="{TemplateBinding ActiveStroke}"
+                    StrokeThickness="{TemplateBinding StrokeThickness}"
+                    StrokeLineCap="{TemplateBinding StrokeLineCap}"
+                    StrokeJoin="{TemplateBinding StrokeJoin}"
+                    StrokeDashOffset="{TemplateBinding StrokeDashOffset}"
+                    StrokeDashArray="{TemplateBinding StrokeDashArray}"
+                    Spacing="{TemplateBinding Spacing}"
+                    IntegerDigits="{TemplateBinding IntegerDigits}"
+                    DecimalPlaces="{TemplateBinding DecimalPlaces}"
+                    DecimalSeparatorSize="{TemplateBinding DecimalSeparatorSize}"
+                    DecimalPlaceScale="{TemplateBinding DecimalPlaceScale}"
+                    PadZeroLeft="{TemplateBinding PadZeroLeft}"
+                    PadZeroRight="{TemplateBinding PadZeroRight}"
+                    MinusAlignLeft="{TemplateBinding MinusAlignLeft}"/>
+              </Grid>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style Selector="vki|DigitalText.Glow">
+      <Setter Property="ClipToBounds" Value="False"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type vki:DigitalText}">
+            <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}">
+              <Grid Margin="{TemplateBinding Padding}">
+                <vki:DigitalTextPresenter
+                    Value="{TemplateBinding Value}"
+                    DigitalFont="{TemplateBinding DigitalFont}"
+                    Length="{TemplateBinding Length}"
+                    Format="{TemplateBinding Format}"
+                    SegmentFilter="InactiveOnly"
+                    Fill="{TemplateBinding Inactive}"
+                    Stroke="{TemplateBinding InactiveStroke}"
+                    StrokeThickness="{TemplateBinding StrokeThickness}"
+                    StrokeLineCap="{TemplateBinding StrokeLineCap}"
+                    StrokeJoin="{TemplateBinding StrokeJoin}"
+                    StrokeDashOffset="{TemplateBinding StrokeDashOffset}"
+                    StrokeDashArray="{TemplateBinding StrokeDashArray}"
+                    Spacing="{TemplateBinding Spacing}"/>
+                <vki:DigitalTextPresenter
+                    Value="{TemplateBinding Value}"
+                    DigitalFont="{TemplateBinding DigitalFont}"
+                    Length="{TemplateBinding Length}"
+                    Format="{TemplateBinding Format}"
+                    Fill="{TemplateBinding Active}"
+                    Stroke="{TemplateBinding Active}"
+                    StrokeThickness="5"
+                    StrokeLineCap="{TemplateBinding StrokeLineCap}"
+                    StrokeJoin="{TemplateBinding StrokeJoin}"
+                    StrokeDashOffset="{TemplateBinding StrokeDashOffset}"
+                    StrokeDashArray="{TemplateBinding StrokeDashArray}"
+                    Spacing="{TemplateBinding Spacing}">
+                  <vki:DigitalTextPresenter.Effect>
+                    <BlurEffect Radius="10"/>
+                  </vki:DigitalTextPresenter.Effect>
+                </vki:DigitalTextPresenter>
+                <vki:DigitalTextPresenter
+                    Value="{TemplateBinding Value}"
+                    DigitalFont="{TemplateBinding DigitalFont}"
+                    Length="{TemplateBinding Length}"
+                    Format="{TemplateBinding Format}"
+                    Fill="White"
+                    Stroke="{TemplateBinding ActiveStroke}"
+                    StrokeThickness="{TemplateBinding StrokeThickness}"
+                    StrokeLineCap="{TemplateBinding StrokeLineCap}"
+                    StrokeJoin="{TemplateBinding StrokeJoin}"
+                    StrokeDashOffset="{TemplateBinding StrokeDashOffset}"
+                    StrokeDashArray="{TemplateBinding StrokeDashArray}"
+                    Spacing="{TemplateBinding Spacing}"/>
+              </Grid>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+  </UserControl.Styles>
+  <Grid>
+    <ContentPresenter ContentTemplate="{Binding #selector.SelectedItem.Tag}"/>
+    <ComboBox x:Name="selector" SelectedIndex="0" Margin="10">
+      <ComboBoxItem Content="Digital Number">
+        <ComboBoxItem.Tag>
+          <DataTemplate>
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+              </Grid.RowDefinitions>
+              <Viewbox StretchDirection="DownOnly" Margin="10" ClipToBounds="False">
+                <Grid>
+                  <Rectangle Stroke="White" StrokeThickness="1" StrokeDashArray="2,2" Opacity="0.3"/>
+                  <vki:DigitalNumber
+                      x:Name="digitalNumber"
+                      Classes.Glow="{Binding #glowCheckBox.IsChecked}"
+                      Active="Cyan"
+                      Value="{Binding #value.Value}"
+                      DecimalPlaces="2"
+                      HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1">
+                    <vki:DigitalNumber.DigitalFont>
+                      <vkid:SevenSegmentFont Size="100" SlantAngle="10"/>
+                    </vki:DigitalNumber.DigitalFont>
+                  </vki:DigitalNumber>
+                </Grid>
+              </Viewbox>
+              <CheckBox x:Name="glowCheckBox" Content="Glowed Template"/>
+              <StackPanel Grid.Row="1" Margin="10">
+                <UniformGrid Columns="2" DataContext="{Binding #digitalNumber}">
+                  <HeaderedContentControl Header="{Binding IntegerDigits, StringFormat=Integer Digits: {0}}">
+                    <Slider Minimum="0" Maximum="29" Value="{Binding IntegerDigits}"/>
+                  </HeaderedContentControl>
+                  <HeaderedContentControl Header="{Binding #value.Value, StringFormat=Value: {0:#0.###}}">
+                    <Slider x:Name="value" Minimum="-999" Maximum="1000" Value="-999"/>
+                  </HeaderedContentControl>
+                  <HeaderedContentControl Header="{Binding DecimalPlaces, StringFormat=Decimal Places: {0}}">
+                    <Slider Minimum="0" Maximum="28" Value="{Binding DecimalPlaces}"/>
+                  </HeaderedContentControl>
+                  <HeaderedContentControl Header="{Binding DecimalPlaceScale, StringFormat=Decimal Place Scale: {0:P1}}">
+                    <Slider Minimum="0" Maximum="1" Value="{Binding DecimalPlaceScale}"/>
+                  </HeaderedContentControl>
+                  <HeaderedContentControl Header="{Binding DecimalSeparatorSize, StringFormat=Decimal Separator Size: {0:P1}}">
+                    <Slider Minimum="0" Maximum="1" Value="{Binding DecimalSeparatorSize}"/>
+                  </HeaderedContentControl>
+                  <HeaderedContentControl Header="{Binding Spacing, StringFormat=Spacing: {0:P1}}">
+                    <Slider Minimum="0" Maximum="1" Value="{Binding Spacing}"/>
+                  </HeaderedContentControl>
+                </UniformGrid>
+                <UniformGrid Columns="2" DataContext="{Binding #digitalNumber.DigitalFont}">
+                  <HeaderedContentControl Header="{Binding Thickness, StringFormat=Thickness: {0:P1}}">
+                    <Slider Minimum="0" Maximum="1" Value="{Binding Thickness}"/>
+                  </HeaderedContentControl>
+                  <HeaderedContentControl Header="{Binding Gap, StringFormat=Gap: {0:P1}}">
+                    <Slider Minimum="0" Maximum="1" Value="{Binding Gap}"/>
+                  </HeaderedContentControl>
+                  <HeaderedContentControl Header="{Binding CornerChamfer, StringFormat=Corner Chamfer: {0:P1}}">
+                    <Slider Minimum="0" Maximum="1" Value="{Binding CornerChamfer}"/>
+                  </HeaderedContentControl>
+                  <HeaderedContentControl Header="{Binding MiddleChamfer, StringFormat=Middle Chamfer: {0:P1}}">
+                    <Slider Minimum="0" Maximum="1" Value="{Binding MiddleChamfer}"/>
+                  </HeaderedContentControl>
+                  <HeaderedContentControl Header="{Binding SlantAngle, StringFormat=Slant Angle: {0:#0.###}°}">
+                    <Slider Minimum="0" Maximum="30" Value="{Binding SlantAngle}"/>
+                  </HeaderedContentControl>
+                  <HeaderedContentControl Header="{Binding WidthRatio, StringFormat=Width Ratio: {0:P1}}">
+                    <Slider Minimum="0" Maximum="2" Value="{Binding WidthRatio}"/>
+                  </HeaderedContentControl>
+                  <HeaderedContentControl Header="{Binding CornerGapWarping, StringFormat=Corner Gap Warping: {0:P1}}">
+                    <Slider Minimum="0" Maximum="1" Value="{Binding CornerGapWarping}"/>
+                  </HeaderedContentControl>
+                  <HeaderedContentControl Header="{Binding Size, StringFormat=Size: {0:#0.###}px}">
+                    <Slider Minimum="0" Maximum="200" Value="{Binding Size}"/>
+                  </HeaderedContentControl>
+                </UniformGrid>
+              </StackPanel>
+            </Grid>
+          </DataTemplate>
+        </ComboBoxItem.Tag>
+      </ComboBoxItem>
+      <ComboBoxItem Content="Digital Text">
+        <ComboBoxItem.Tag>
+          <DataTemplate>
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+              </Grid.RowDefinitions>
+              <Viewbox StretchDirection="DownOnly" Margin="10" ClipToBounds="False">
+                <Grid>
+                  <Rectangle Stroke="White" StrokeThickness="1" StrokeDashArray="2,2" Opacity="0.3"/>
+                  <vki:DigitalText
+                      x:Name="digitalText"
+                      Classes.Glow="{Binding #glowCheckBox.IsChecked}"
+                      Value="Hello, World!"
+                      Length="13"
+                      Format="N2"
+                      HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1">
+                    <vki:DigitalText.DigitalFont>
+                      <vkid:RoundedRectCell5x7Font Size="60"/>
+                    </vki:DigitalText.DigitalFont>
+                  </vki:DigitalText>
+                </Grid>
+              </Viewbox>
+              <CheckBox x:Name="glowCheckBox" Content="Glowed Template"/>
+              <StackPanel Grid.Row="1" Margin="10">
+                <UniformGrid Columns="2" DataContext="{Binding #digitalText}">
+                  <HeaderedContentControl Header="{Binding Length, StringFormat=Length: {0}}">
+                    <Slider Minimum="0" Maximum="20" Value="{Binding Length}"/>
+                  </HeaderedContentControl>
+                  <HeaderedContentControl Header="Text">
+                    <TextBox x:Name="text" Text="{Binding Value}" />
+                  </HeaderedContentControl>
+                </UniformGrid>
+                <UniformGrid Columns="2" DataContext="{Binding #digitalText.DigitalFont}">
+                  <HeaderedContentControl Header="{Binding Spacing, StringFormat=Spacing: {0:P1}}" DataContext="{Binding #digitalText}">
+                    <Slider Minimum="0" Maximum="1" Value="{Binding Spacing}"/>
+                  </HeaderedContentControl>
+                  <HeaderedContentControl Header="{Binding Gap, StringFormat=Gap: {0:P1}}">
+                    <Slider Minimum="0" Maximum="1" Value="{Binding Gap}"/>
+                  </HeaderedContentControl>
+                  <HeaderedContentControl Header="{Binding SlantAngle, StringFormat=Slant Angle: {0:#0.###}°}">
+                    <Slider Minimum="0" Maximum="30" Value="{Binding SlantAngle}"/>
+                  </HeaderedContentControl>
+                  <HeaderedContentControl Header="{Binding WidthRatio, StringFormat=Width Ratio: {0:P1}}">
+                    <Slider Minimum="0" Maximum="2" Value="{Binding WidthRatio}"/>
+                  </HeaderedContentControl>
+                  <HeaderedContentControl Header="{Binding CornerRadius, StringFormat=Corner Radius: {0:P1}}">
+                    <Slider Minimum="0" Maximum="1" Value="{Binding CornerRadius}"/>
+                  </HeaderedContentControl>
+                  <HeaderedContentControl Header="{Binding Size, StringFormat=Size: {0:#0.###}px}">
+                    <Slider Minimum="0" Maximum="200" Value="{Binding Size}"/>
+                  </HeaderedContentControl>
+                </UniformGrid>
+              </StackPanel>
+            </Grid>
+          </DataTemplate>
+        </ComboBoxItem.Tag>
+      </ComboBoxItem>
+    </ComboBox>
+  </Grid>
+</UserControl>

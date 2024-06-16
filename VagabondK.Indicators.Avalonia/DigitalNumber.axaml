@@ -1,0 +1,64 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vki="http://schemas.vagabond-k.com/avaloniaui/indicators"
+        xmlns:vkid="using:VagabondK.Indicators.DigitalFonts">
+  <Design.PreviewWith>
+    <vki:DigitalNumber />
+  </Design.PreviewWith>
+
+  <Style Selector="vki|DigitalNumber">
+    <Setter Property="DigitalFont">
+      <Setter.Value>
+        <vkid:SevenSegmentFont/>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="ClipToBounds" Value="False"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}">
+          <Grid Margin="{TemplateBinding Padding}">
+            <vki:DigitalNumberPresenter
+                Value="{TemplateBinding Value}"
+                DigitalFont="{TemplateBinding DigitalFont}"
+                SegmentFilter="InactiveOnly"
+                Fill="{TemplateBinding Inactive}"
+                Stroke="{TemplateBinding InactiveStroke}"
+                StrokeThickness="{TemplateBinding StrokeThickness}"
+                StrokeLineCap="{TemplateBinding StrokeLineCap}"
+                StrokeJoin="{TemplateBinding StrokeJoin}"
+                StrokeDashOffset="{TemplateBinding StrokeDashOffset}"
+                StrokeDashArray="{TemplateBinding StrokeDashArray}"
+                Spacing="{TemplateBinding Spacing}"
+                IntegerDigits="{TemplateBinding IntegerDigits}"
+                DecimalPlaces="{TemplateBinding DecimalPlaces}"
+                DecimalSeparatorSize="{TemplateBinding DecimalSeparatorSize}"
+                DecimalPlaceScale="{TemplateBinding DecimalPlaceScale}"
+                PadZeroLeft="{TemplateBinding PadZeroLeft}"
+                PadZeroRight="{TemplateBinding PadZeroRight}"
+                MinusAlignLeft="{TemplateBinding MinusAlignLeft}"/>
+            <vki:DigitalNumberPresenter
+                Value="{TemplateBinding Value}"
+                DigitalFont="{TemplateBinding DigitalFont}"
+                Fill="{TemplateBinding Active}"
+                Stroke="{TemplateBinding ActiveStroke}"
+                StrokeThickness="{TemplateBinding StrokeThickness}"
+                StrokeLineCap="{TemplateBinding StrokeLineCap}"
+                StrokeJoin="{TemplateBinding StrokeJoin}"
+                StrokeDashOffset="{TemplateBinding StrokeDashOffset}"
+                StrokeDashArray="{TemplateBinding StrokeDashArray}"
+                Spacing="{TemplateBinding Spacing}"
+                IntegerDigits="{TemplateBinding IntegerDigits}"
+                DecimalPlaces="{TemplateBinding DecimalPlaces}"
+                DecimalSeparatorSize="{TemplateBinding DecimalSeparatorSize}"
+                DecimalPlaceScale="{TemplateBinding DecimalPlaceScale}"
+                PadZeroLeft="{TemplateBinding PadZeroLeft}"
+                PadZeroRight="{TemplateBinding PadZeroRight}"
+                MinusAlignLeft="{TemplateBinding MinusAlignLeft}"/>
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+</Styles>

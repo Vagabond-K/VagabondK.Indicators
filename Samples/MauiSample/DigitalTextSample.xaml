@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vki="http://schemas.vagabond-k.com/winfx/2016/xaml/indicators"
+    xmlns:vkid="clr-namespace:VagabondK.Indicators.DigitalFonts;assembly=VagabondK.Indicators"
+    x:Class="MauiSample.DigitalTextSample">
+    <Grid RowDefinitions="Auto,*">
+        <Border HeightRequest="200" StrokeThickness="0" Margin="20">
+            <Border VerticalOptions="Center" HorizontalOptions="Center" Stroke="Gray" StrokeThickness="1" StrokeDashArray="2 2">
+                <vki:DigitalText x:Name="digitalText" Value="Hello, World!" Format="N2" Length="13" Active="Lime" Aspect="Uniform">
+                    <vki:DigitalText.DigitalFont>
+                        <vkid:RoundedRectCell5x7Font/>
+                    </vki:DigitalText.DigitalFont>
+                </vki:DigitalText>
+            </Border>
+        </Border>
+        <ScrollView Grid.Row="1">
+            <FlexLayout BindingContext="{Binding Source={x:Reference digitalText}}" Wrap="Wrap" AlignContent="Start" Margin="10,0">
+                <FlexLayout.Resources>
+                    <Style TargetType="Slider">
+                        <Setter Property="Margin" Value="10,0"/>
+                    </Style>
+                    <Style TargetType="Label">
+                        <Setter Property="Margin" Value="10,0"/>
+                    </Style>
+                    <Style TargetType="VerticalStackLayout">
+                        <Setter Property="FlexLayout.Basis" Value="50%"/>
+                        <Setter Property="FlexLayout.Grow" Value="0"/>
+                        <Setter Property="FlexLayout.Shrink" Value="0"/>
+                        <Setter Property="FlexLayout.AlignSelf" Value="Start"/>
+                        <Setter Property="Margin" Value="0,4"/>
+                    </Style>
+                </FlexLayout.Resources>
+                <VerticalStackLayout FlexLayout.Basis="100%">
+                    <Label Text="Text"/>
+                    <Entry Text="{Binding Value}"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout FlexLayout.Basis="100%">
+                    <Label Text="{Binding Length, StringFormat='Length: {0}'}"/>
+                    <Slider Minimum="0" Maximum="20" Value="{Binding Length}"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <Label Text="{Binding Spacing, StringFormat='Spacing: {0:P1}'}"/>
+                    <Slider Minimum="0" Maximum="1" Value="{Binding Spacing}"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout BindingContext="{Binding DigitalFont}">
+                    <Label Text="{Binding Gap, StringFormat='Gap: {0:P1}'}"/>
+                    <Slider Minimum="0" Maximum="1" Value="{Binding Gap}"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout BindingContext="{Binding DigitalFont}">
+                    <Label Text="{Binding SlantAngle, StringFormat='Slant Angle: {0:#0.###}°'}"/>
+                    <Slider Minimum="0" Maximum="50" Value="{Binding SlantAngle}"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout BindingContext="{Binding DigitalFont}">
+                    <Label Text="{Binding WidthRatio, StringFormat='Width Ratio: {0:P1}'}"/>
+                    <Slider Minimum="0" Maximum="2" Value="{Binding WidthRatio}"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout BindingContext="{Binding DigitalFont}">
+                    <Label Text="{Binding CornerRadius, StringFormat='Corner Radius: {0:P1}'}"/>
+                    <Slider Minimum="0" Maximum="1" Value="{Binding CornerRadius}"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout BindingContext="{Binding DigitalFont}">
+                    <Label Text="{Binding Size, StringFormat='Size: {0:#0.###}px'}"/>
+                    <Slider Minimum="0" Maximum="100" Value="{Binding Size}" IsEnabled="False"/>
+                </VerticalStackLayout>
+            </FlexLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

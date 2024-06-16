@@ -1,0 +1,11 @@
+﻿<svg style="display:none">
+    <defs>
+        @for (int i = 0; i < segmentPaths.Count; i++)
+        {
+            <path id="@(segmentIdPrefix + i)" d="@segmentPaths[i]" />
+        }
+        <defs>
+            @SvgDefs
+        </defs>
+    </defs>
+</svg>

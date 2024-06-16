@@ -1,0 +1,98 @@
+﻿@page "/digital/text"
+@inject IJSRuntime JS
+@inject IServiceProvider serviceProvider
+@inject ILoggerFactory loggerFactory
+
+<PageTitle>Digital Text - Vagabond K's Indicators</PageTitle>
+
+<SectionContent SectionName="AppBarContent">
+    <MudSwitch @bind-Value="@glowEffect" Label="Glow Effect" />
+    <MudButton Color="Color.Dark" EndIcon="@Icons.Material.Filled.SaveAlt" Variant="Variant.Filled" @onclick="ExportToSVG"><MudText>Export to SVG</MudText></MudButton>
+</SectionContent>
+
+<div style="display:flex;justify-content:center;align-items:center;height:250px;">
+    <DigitalText @ref="digitalText" Style="border-color:#404040;border-width:1px;border-style: dashed;" DigitalFont="@font" Value="@value" ActiveStyle="@ActiveStyle" Length="@length" Format="@stringFormat" Spacing="@spacing">
+        <SvgDefs>
+            @if (glowEffect)
+            {
+                <filter id="glowEffect" height="300%" width="300%" x="-75%" y="-75%">
+                    <feMorphology operator="dilate" radius="@(font.Size/40)" in="SourceGraphic" result="thicken" />
+                    <feGaussianBlur in="thicken" stdDeviation="@(font.Size/20)" result="blurred" />
+                    <feFlood flood-color="rgb(255,255,255)" result="white" />
+                    <feComposite in="white" in2="SourceAlpha" operator="in" result="whiteColored" />
+                    <feMerge>
+                        <feMergeNode in="blurred" />
+                        <feMergeNode in="whiteColored" />
+                    </feMerge>
+                </filter>
+            }
+        </SvgDefs>
+    </DigitalText>
+</div>
+
+<MudCard Class="mt-5">
+    <MudCardContent>
+        <MudGrid>
+            <MudItem xs="12"><MudTextField @bind-Value="value" Label="Text" Variant="Variant.Filled" Immediate="true" /></MudItem>
+            <MudItem xs="12"><MudSlider @bind-Value="length" TickMarks="true" Min="0" Max="29">Length: @length</MudSlider></MudItem>
+            <MudItem xs="6"><MudSlider @bind-Value="spacing" Min="0" Max="1" Step="0.001">Spacing: @spacing.ToString("P1")</MudSlider></MudItem>
+            <MudItem xs="6"><MudSlider @bind-Value="font.Gap" Min="0" Max="1" Step="0.001">Gap: @font.Gap.ToString("P1")</MudSlider></MudItem>
+            <MudItem xs="6"><MudSlider @bind-Value="font.SlantAngle" Min="0" Max="50" Step="0.001">Slant Angle: @($"{font.SlantAngle:#0.###}°")</MudSlider></MudItem>
+            <MudItem xs="6"><MudSlider @bind-Value="font.WidthRatio" Min="0" Max="2" Step="0.001">Width Ratio: @font.WidthRatio.ToString("P1")</MudSlider></MudItem>
+            <MudItem xs="6"><MudSlider @bind-Value="font.CornerRadius" Min="0" Max="1" Step="0.001">Corner Chamfer: @font.CornerRadius.ToString("P1")</MudSlider></MudItem>
+            <MudItem xs="6"><MudSlider @bind-Value="font.Size" Min="0" Max="200" Step="0.001">Size: @($"{font.Size:#0.###}px")</MudSlider></MudItem>
+        </MudGrid>
+    </MudCardContent>
+</MudCard>
+
+<script>
+    window.downloadFileFromStream = async (fileName, contentStreamReference) => {
+        const arrayBuffer = await contentStreamReference.arrayBuffer();
+        const blob = new Blob([arrayBuffer]);
+        const url = URL.createObjectURL(blob);
+        const anchorElement = document.createElement('a');
+        anchorElement.href = url;
+        anchorElement.download = fileName ?? '';
+        anchorElement.click();
+        anchorElement.remove();
+        URL.revokeObjectURL(url);
+    }
+</script>
+
+@code {
+    private DigitalText digitalText = new();
+    private RoundedRectCell5x7Font font = new RoundedRectCell5x7Font() { Size = 100 };
+
+    bool glowEffect = false;
+    private string value = "Hello, World!";
+    private int length = 13;
+    private string stringFormat = "N2";
+    private double spacing = 0.2;
+    private string ActiveStyle => glowEffect ? "fill:lime;filter:url(#glowEffect)" : "fill:lime;";
+
+    private async Task ExportToSVG()
+    {
+        await using var htmlRenderer = new HtmlRenderer(serviceProvider, loggerFactory);
+        var svg = await htmlRenderer.Dispatcher.InvokeAsync(async () =>
+        {
+            var dictionary = new Dictionary<string, object?>
+                {
+                { nameof(digitalText.Value), value },
+                { nameof(digitalText.DigitalFont), font },
+                { nameof(digitalText.Length), length },
+                { nameof(digitalText.Spacing), spacing },
+                { nameof(digitalText.ActiveStyle), ActiveStyle },
+                { nameof(digitalText.SvgDefs), digitalText.SvgDefs },
+                };
+            var parameters = ParameterView.FromDictionary(dictionary);
+            var output = await htmlRenderer.RenderComponentAsync<DigitalText>(parameters);
+
+            return "<?xml version=\"1.0\" encoding=\"utf-8\"?>" + output.ToHtmlString();
+        });
+
+        var stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(svg));
+        var fileName = "DigitalText.svg";
+        using var streamRef = new DotNetStreamReference(stream: stream);
+        await JS.InvokeVoidAsync("downloadFileFromStream", fileName, streamRef);
+    }
+}
