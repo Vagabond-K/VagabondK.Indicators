@@ -114,7 +114,7 @@ namespace VagabondK.Indicators.PartBuilders
                         context.Close();
                     });
                 }
-                else if (!overRadiusY)
+                else if (overRadiusY)
                 {
                     var center1 = Math.Min(cornerRadius, width / 2);
                     var center2 = width - center1;
