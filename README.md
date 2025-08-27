@@ -1,9 +1,15 @@
-# VagabondK.Indicators [![NuGet](https://img.shields.io/nuget/v/VagabondK.Indicators.svg)](https://www.nuget.org/packages/VagabondK.Indicators/) [![License](https://img.shields.io/badge/license-LGPL--2.1-blue.svg)](https://licenses.nuget.org/LGPL-2.1-only)
+# VagabondK.Indicators [![NuGet](https://img.shields.io/nuget/v/VagabondK.Indicators.svg)](https://www.nuget.org/packages/VagabondK.Indicators/) [![NuGet Downloads](https://img.shields.io/nuget/dt/VagabondK.Indicators.svg)](https://www.nuget.org/packages/VagabondK.Indicators/) [![License](https://img.shields.io/badge/license-LGPL--2.1-blue.svg)](https://licenses.nuget.org/LGPL-2.1-only)
 데이터를 화면에 표시하기 위한 .NET 기반 인디케이터 관련 라이브러리입니다.  
 그런데 아직은 Digital Indicator 밖에 없네요...  
 Analog Indicator는 아직 못 만들었지만, 그래도 공유는 해 놓습니다.  
 혹시나 필요하신 분은 얼마든지 가져다 쓰세요~  
 개발 과정과 기타 설명은 개인 [블로그 글](https://blog.naver.com/vagabond-k/223481454735)에 기록했습니다.
+
+## 플랫폼별 구현
+- **[VagabondK.Indicators.Windows](https://www.nuget.org/packages/VagabondK.Indicators.Windows)** [![NuGet](https://img.shields.io/nuget/v/VagabondK.Indicators.Windows.svg)](https://www.nuget.org/packages/VagabondK.Indicators.Windows/) [![NuGet Downloads](https://img.shields.io/nuget/dt/VagabondK.Indicators.Windows.svg)](https://www.nuget.org/packages/VagabondK.Indicators.Windows/)  
+- **[VagabondK.Indicators.Razor](https://www.nuget.org/packages/VagabondK.Indicators.Razor)** [![NuGet](https://img.shields.io/nuget/v/VagabondK.Indicators.Razor.svg)](https://www.nuget.org/packages/VagabondK.Indicators.Razor/) [![NuGet Downloads](https://img.shields.io/nuget/dt/VagabondK.Indicators.Razor.svg)](https://www.nuget.org/packages/VagabondK.Indicators.Razor/)  
+- **[VagabondK.Indicators.Avalonia](https://www.nuget.org/packages/VagabondK.Indicators.Avalonia)** [![NuGet](https://img.shields.io/nuget/v/VagabondK.Indicators.Avalonia.svg)](https://www.nuget.org/packages/VagabondK.Indicators.Avalonia/) [![NuGet Downloads](https://img.shields.io/nuget/dt/VagabondK.Indicators.Avalonia.svg)](https://www.nuget.org/packages/VagabondK.Indicators.Avalonia/)  
+- **[VagabondK.Indicators.Maui](https://www.nuget.org/packages/VagabondK.Indicators.Maui)** [![NuGet](https://img.shields.io/nuget/v/VagabondK.Indicators.Maui.svg)](https://www.nuget.org/packages/VagabondK.Indicators.Maui/) [![NuGet Downloads](https://img.shields.io/nuget/dt/VagabondK.Indicators.Maui.svg)](https://www.nuget.org/packages/VagabondK.Indicators.Maui/)  
 
 ## Blazor 기반 샘플
 https://vagabond-k.github.io/BlazorIndicators/
