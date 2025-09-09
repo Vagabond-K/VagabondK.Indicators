@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Globalization;
+using System.Text;
 using VagabondK.Indicators.GeometryUtil;
 
 namespace VagabondK.Indicators
@@ -16,8 +17,8 @@ namespace VagabondK.Indicators
         /// <param name="startPoint">시작 포인트</param>
         protected override void OnBeginPath(in Point startPoint)
             => Renderer.Append('M')
-            .Append(space).Append(startPoint.X)
-            .Append(space).Append(startPoint.Y);
+            .Append(space).AppendDouble(startPoint.X)
+            .Append(space).AppendDouble(startPoint.Y);
 
         /// <summary>
         /// 렌더러를 이용하여 특정 포인트를 향해 선분을 그립니다.
@@ -25,8 +26,8 @@ namespace VagabondK.Indicators
         /// <param name="endPoint">선분의 끝 포인트</param>
         protected override void OnDrawLine(in Point endPoint)
             => Renderer.Append('L')
-            .Append(space).Append(endPoint.X)
-            .Append(space).Append(endPoint.Y);
+            .Append(space).AppendDouble(endPoint.X)
+            .Append(space).AppendDouble(endPoint.Y);
 
         /// <summary>
         /// 렌더러를 이용하여 3차 베지어 곡선을 그립니다.
@@ -36,12 +37,12 @@ namespace VagabondK.Indicators
         /// <param name="endPoint">곡선의 끝 포인트</param>
         protected override void OnDrawCubicBezier(in Point controlPoint1, in Point controlPoint2, in Point endPoint)
             => Renderer.Append('C')
-            .Append(space).Append(controlPoint1.X)
-            .Append(space).Append(controlPoint1.Y)
-            .Append(space).Append(controlPoint2.X)
-            .Append(space).Append(controlPoint2.Y)
-            .Append(space).Append(endPoint.X)
-            .Append(space).Append(endPoint.Y);
+            .Append(space).AppendDouble(controlPoint1.X)
+            .Append(space).AppendDouble(controlPoint1.Y)
+            .Append(space).AppendDouble(controlPoint2.X)
+            .Append(space).AppendDouble(controlPoint2.Y)
+            .Append(space).AppendDouble(endPoint.X)
+            .Append(space).AppendDouble(endPoint.Y);
 
         /// <summary>
         /// 렌더러를 이용하여 2차 베지어 곡선을 그립니다.
@@ -50,14 +51,22 @@ namespace VagabondK.Indicators
         /// <param name="endPoint">곡선의 끝 포인트</param>
         protected override void OnDrawQuadraticBezier(in Point controlPoint, in Point endPoint)
             => Renderer.Append('Q')
-            .Append(space).Append(controlPoint.X)
-            .Append(space).Append(controlPoint.Y)
-            .Append(space).Append(endPoint.X)
-            .Append(space).Append(endPoint.Y);
+            .Append(space).AppendDouble(controlPoint.X)
+            .Append(space).AppendDouble(controlPoint.Y)
+            .Append(space).AppendDouble(endPoint.X)
+            .Append(space).AppendDouble(endPoint.Y);
 
         /// <summary>
         /// 렌더러에서 패스 닫기 작업을 수행합니다.
         /// </summary>
         protected override void OnClosePath() => Renderer.Append('Z');
+    }
+
+    static class StringBuilderExtensions
+    {
+        private const string doubleFormat = "{0}";
+
+        public static StringBuilder AppendDouble(this StringBuilder stringBuilder, in double value)
+            => stringBuilder.AppendFormat(CultureInfo.InvariantCulture, doubleFormat, value);
     }
 }
