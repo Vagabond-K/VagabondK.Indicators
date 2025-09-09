@@ -11,7 +11,7 @@
     <RepositoryUrl>https://github.com/Vagabond-K/VagabondK.Indicators/tree/master/VagabondK.Indicators</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <Description>데이터를 화면에 표시하기 위한 인디케이터 관련 라이브러리입니다.</Description>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <PackageProjectUrl>https://github.com/Vagabond-K/VagabondK.Indicators/tree/master/VagabondK.Indicators</PackageProjectUrl>
   </PropertyGroup>
 

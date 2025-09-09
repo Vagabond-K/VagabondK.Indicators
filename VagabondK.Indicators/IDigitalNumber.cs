@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using VagabondK.Indicators.DigitalFonts;
 using VagabondK.Indicators.GeometryUtil;
@@ -122,10 +123,10 @@ namespace VagabondK.Indicators
 
             if (value != null)
             {
-                var stringValue = value.ToString();
+                var stringValue = string.Format(CultureInfo.InvariantCulture, "{0}", value);
 
-                var parsed = decimal.TryParse(stringValue, out var decimalValue);
-                if (!parsed && (parsed = double.TryParse(stringValue, out var doubleValue)))
+                var parsed = decimal.TryParse(stringValue, NumberStyles.Number, CultureInfo.InvariantCulture.NumberFormat, out var decimalValue);
+                if (!parsed && (parsed = double.TryParse(stringValue, NumberStyles.Number, CultureInfo.InvariantCulture.NumberFormat, out var doubleValue)))
                     decimalValue = (decimal)doubleValue;
                 if (parsed)
                 {
@@ -137,7 +138,7 @@ namespace VagabondK.Indicators
                     {
                         stringValue = null;
                         valueIsValid = true;
-                        var parts = decimalValue.ToString().Split('.');
+                        var parts = string.Format(CultureInfo.InvariantCulture, "{0}", decimalValue).Split('.');
                         if (parts.Length > 0)
                         {
                             integerDigits = integerDigitCount <= 0 ? ""

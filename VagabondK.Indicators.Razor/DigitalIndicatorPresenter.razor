@@ -1,4 +1,5 @@
-﻿<svg class="vki-digital-presenter @Class" style="fill:currentColor;@Style" width="@Size.Width" height="@Size.Height" viewBox="0 0 @Size.Width @Size.Height" xmlns="http://www.w3.org/2000/svg">
+﻿@using System.Globalization
+<svg class="vki-digital-presenter @Class" style="fill:currentColor;@Style" width="@Size.Width.ToString("R", CultureInfo.InvariantCulture)" height="@Size.Height.ToString("R", CultureInfo.InvariantCulture)" viewBox="0 0 @Size.Width.ToString("R", CultureInfo.InvariantCulture) @Size.Height.ToString("R", CultureInfo.InvariantCulture)" xmlns="http://www.w3.org/2000/svg">
     @if (!UseSharedSegments)
     {
         <defs>
@@ -12,11 +13,11 @@
     <g class="@defaultClassName">
         @foreach (var item in segmentDrawings)
         {
-            <use href="#@item.Value" transform="matrix(@item.Transform.M11 @item.Transform.M12 @item.Transform.M21 @item.Transform.M22 @item.Transform.M31 @item.Transform.M32)" />
+            <use href="#@item.Value" transform="matrix(@item.Transform.M11.ToString("R", CultureInfo.InvariantCulture) @item.Transform.M12.ToString("R", CultureInfo.InvariantCulture) @item.Transform.M21.ToString("R", CultureInfo.InvariantCulture) @item.Transform.M22.ToString("R", CultureInfo.InvariantCulture) @item.Transform.M31.ToString("R", CultureInfo.InvariantCulture) @item.Transform.M32.ToString("R", CultureInfo.InvariantCulture))" />
         }
         @foreach (var item in customDrawings)
         {
-            <path d="@item.Value" transform="matrix(@item.Transform.M11 @item.Transform.M12 @item.Transform.M21 @item.Transform.M22 @item.Transform.M31 @item.Transform.M32)" />
+            <path d="@item.Value" transform="matrix(@item.Transform.M11.ToString("R", CultureInfo.InvariantCulture) @item.Transform.M12.ToString("R", CultureInfo.InvariantCulture) @item.Transform.M21.ToString("R", CultureInfo.InvariantCulture) @item.Transform.M22.ToString("R", CultureInfo.InvariantCulture) @item.Transform.M31.ToString("R", CultureInfo.InvariantCulture) @item.Transform.M32.ToString("R", CultureInfo.InvariantCulture))" />
         }
     </g>
 </svg>
