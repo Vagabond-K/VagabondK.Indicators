@@ -1,5 +1,5 @@
 ﻿@using System.Globalization
-<svg class="vki-digital-presenter @Class" style="fill:currentColor;@Style" width="@Size.Width.ToString("R", CultureInfo.InvariantCulture)" height="@Size.Height.ToString("R", CultureInfo.InvariantCulture)" viewBox="0 0 @Size.Width.ToString("R", CultureInfo.InvariantCulture) @Size.Height.ToString("R", CultureInfo.InvariantCulture)" xmlns="http://www.w3.org/2000/svg">
+<svg class="vki-digital-presenter @Class" style="fill:currentColor;@Style" width="@Size.Width.ToSvgString()" height="@Size.Height.ToSvgString()" viewBox="0 0 @Size.Width.ToSvgString() @Size.Height.ToSvgString()" xmlns="http://www.w3.org/2000/svg">
     @if (!UseSharedSegments)
     {
         <defs>
@@ -13,11 +13,11 @@
     <g class="@defaultClassName">
         @foreach (var item in segmentDrawings)
         {
-            <use href="#@item.Value" transform="matrix(@item.Transform.M11.ToString("R", CultureInfo.InvariantCulture) @item.Transform.M12.ToString("R", CultureInfo.InvariantCulture) @item.Transform.M21.ToString("R", CultureInfo.InvariantCulture) @item.Transform.M22.ToString("R", CultureInfo.InvariantCulture) @item.Transform.M31.ToString("R", CultureInfo.InvariantCulture) @item.Transform.M32.ToString("R", CultureInfo.InvariantCulture))" />
+            <use href="#@item.Value" transform="matrix(@item.Transform.M11.ToSvgString() @item.Transform.M12.ToSvgString() @item.Transform.M21.ToSvgString() @item.Transform.M22.ToSvgString() @item.Transform.M31.ToSvgString() @item.Transform.M32.ToSvgString())" />
         }
         @foreach (var item in customDrawings)
         {
-            <path d="@item.Value" transform="matrix(@item.Transform.M11.ToString("R", CultureInfo.InvariantCulture) @item.Transform.M12.ToString("R", CultureInfo.InvariantCulture) @item.Transform.M21.ToString("R", CultureInfo.InvariantCulture) @item.Transform.M22.ToString("R", CultureInfo.InvariantCulture) @item.Transform.M31.ToString("R", CultureInfo.InvariantCulture) @item.Transform.M32.ToString("R", CultureInfo.InvariantCulture))" />
+            <path d="@item.Value" transform="matrix(@item.Transform.M11.ToSvgString() @item.Transform.M12.ToSvgString() @item.Transform.M21.ToSvgString() @item.Transform.M22.ToSvgString() @item.Transform.M31.ToSvgString() @item.Transform.M32.ToSvgString())" />
         }
     </g>
 </svg>

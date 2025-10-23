@@ -1,6 +1,6 @@
 ﻿@using System.Globalization
 @inherits DigitalIndicator
-<svg class="vki-digital-number @Class" style="@Style" width="@Size.Width.ToString("R", CultureInfo.InvariantCulture)" height="@Size.Height.ToString("R", CultureInfo.InvariantCulture)" viewBox="0 0 @Size.Width.ToString("R", CultureInfo.InvariantCulture) @Size.Height.ToString("R", CultureInfo.InvariantCulture)" xmlns="http://www.w3.org/2000/svg">
+<svg class="vki-digital-number @Class" style="@Style" width="@Size.Width.ToSvgString()" height="@Size.Height.ToSvgString()" viewBox="0 0 @Size.Width.ToSvgString() @Size.Height.ToSvgString()" xmlns="http://www.w3.org/2000/svg">
     <defs>
         @SvgDefs
     </defs>
