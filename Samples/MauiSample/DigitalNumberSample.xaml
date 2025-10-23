@@ -8,7 +8,7 @@
     <Grid RowDefinitions="Auto,*">
         <Border HeightRequest="200" StrokeThickness="0" Margin="20">
             <Border VerticalOptions="Center" HorizontalOptions="Center" Stroke="Gray" StrokeThickness="1" StrokeDashArray="2 2">
-                <vki:DigitalNumber x:Name="digitalNumber" Value="{Binding Value, Source={x:Reference value}}" Active="Cyan" IntegerDigits="4" DecimalPlaces="2" Aspect="Uniform">
+                <vki:DigitalNumber x:Name="digitalNumber" Value="{Binding Value, Source={x:Reference value}}" Active="Cyan" Inactive="#20808080" IntegerDigits="4" DecimalPlaces="2" Aspect="Uniform">
                     <vki:DigitalNumber.DigitalFont>
                         <vkid:SevenSegmentFont SlantAngle="10"/>
                     </vki:DigitalNumber.DigitalFont>
@@ -19,10 +19,12 @@
             <FlexLayout BindingContext="{Binding Source={x:Reference digitalNumber}}" Wrap="Wrap" AlignContent="Start" Margin="10,0">
                 <FlexLayout.Resources>
                     <Style TargetType="Slider">
-                        <Setter Property="Margin" Value="10,0"/>
+                        <Setter Property="Margin" Value="0,0"/>
+                        <Setter Property="ThumbColor" Value="{Binding Active.Color, Source={x:Reference digitalNumber}}"/>
+                        <Setter Property="MinimumTrackColor" Value="{Binding ThumbColor, Source={RelativeSource Mode=Self}}"/>
                     </Style>
                     <Style TargetType="Label">
-                        <Setter Property="Margin" Value="10,0"/>
+                        <Setter Property="Margin" Value="15,0,0,0"/>
                     </Style>
                     <Style TargetType="VerticalStackLayout">
                         <Setter Property="FlexLayout.Basis" Value="50%"/>
