@@ -8,7 +8,7 @@
     <Grid RowDefinitions="Auto,*">
         <Border HeightRequest="200" StrokeThickness="0" Margin="20">
             <Border VerticalOptions="Center" HorizontalOptions="Center" Stroke="Gray" StrokeThickness="1" StrokeDashArray="2 2">
-                <vki:DigitalNumber x:Name="digitalNumber" Value="{Binding Value, Source={x:Reference value}}" Active="Cyan" Inactive="#20808080" IntegerDigits="4" DecimalPlaces="2" Aspect="Uniform">
+                <vki:DigitalNumber x:Name="digitalNumber" Value="{Binding Value, Source={x:Reference value}}" Active="Cyan" Inactive="#20808080" IntegerDigits="5" DecimalPlaces="2" Aspect="Uniform">
                     <vki:DigitalNumber.DigitalFont>
                         <vkid:SevenSegmentFont SlantAngle="10"/>
                     </vki:DigitalNumber.DigitalFont>
@@ -40,7 +40,7 @@
                 </VerticalStackLayout>
                 <VerticalStackLayout>
                     <Label Text="{Binding Value, Source={x:Reference value}, StringFormat='Value: {0:#0.###}'}"/>
-                    <Slider x:Name="value" Minimum="-10" Maximum="10" Value="-10"/>
+                    <Slider x:Name="value" Minimum="-999" Maximum="1000" Value="-999"/>
                 </VerticalStackLayout>
                 <VerticalStackLayout>
                     <Label Text="{Binding DecimalPlaces, StringFormat='Decimal Places: {0}'}"/>
