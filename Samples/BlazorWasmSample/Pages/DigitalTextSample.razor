@@ -5,10 +5,13 @@
 
 <PageTitle>Digital Text - Vagabond K's Indicators</PageTitle>
 
-<SectionContent SectionName="AppBarContent">
-    <MudSwitch @bind-Value="@glowEffect" Label="Glow Effect" />
-    <MudButton Color="Color.Dark" EndIcon="@Icons.Material.Filled.SaveAlt" Variant="Variant.Filled" @onclick="ExportToSVG"><MudText>Export to SVG</MudText></MudButton>
-</SectionContent>
+@* 공유 세그먼트 정의 *@
+<SharedDigitalFontSegments DigitalFont="@font" />
+
+<div style="display: flex;justify-content: flex-end;">
+    <MudSwitch @bind-Value="@glowEffect" Label="Glow Effect" Color="Color.Primary" UnCheckedColor="Color.Primary" />
+    <MudButton Color="Color.Dark" EndIcon="@Icons.Material.Filled.SaveAlt" Variant="Variant.Filled" @onclick="ExportToSVG"><MudText Style="text-wrap-mode: nowrap">Export to SVG</MudText></MudButton>
+</div>
 
 <div style="display:flex;justify-content:center;align-items:center;height:250px;">
     <DigitalText @ref="digitalText" Style="border-color:#404040;border-width:1px;border-style: dashed;" DigitalFont="@font" Value="@value" ActiveStyle="@ActiveStyle" Length="@length" Format="@stringFormat" Spacing="@spacing">
