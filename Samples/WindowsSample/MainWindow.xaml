@@ -88,6 +88,7 @@
                                         Active="Cyan"
                                         Value="{Binding ElementName=value, Path=Value}"
                                         DecimalPlaces="2"
+										UseGrouping="{Binding IsChecked, ElementName=useGrouping}"
                                         HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1">
                                         <vki:DigitalNumber.DigitalFont>
                                             <vkid:SevenSegmentFont Size="100" SlantAngle="10"/>
@@ -97,8 +98,9 @@
                             </Viewbox>
                             <Grid DataContext="{Binding ElementName=digitalNumber}">
                                 <Button Style="{StaticResource ExportButton}" CommandParameter="{Binding}"/>
-                                <CheckBox Style="{StaticResource GlowedTemplateCheckBox}"/>
-                            </Grid>
+								<CheckBox x:Name="useGrouping" Content="Use Grouping" VerticalAlignment="Bottom" Margin="10"/>
+								<CheckBox Style="{StaticResource GlowedTemplateCheckBox}"/>
+							</Grid>
                             <Border Grid.Row="1" Background="#80000000">
                                 <StackPanel Margin="10">
                                     <UniformGrid Columns="2" DataContext="{Binding ElementName=digitalNumber}">

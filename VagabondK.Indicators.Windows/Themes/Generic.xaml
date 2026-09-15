@@ -91,7 +91,8 @@
                                 DecimalPlaceScale="{TemplateBinding DecimalPlaceScale}"
                                 PadZeroLeft="{TemplateBinding PadZeroLeft}"
                                 PadZeroRight="{TemplateBinding PadZeroRight}"
-                                MinusAlignLeft="{TemplateBinding MinusAlignLeft}"/>
+                                MinusAlignLeft="{TemplateBinding MinusAlignLeft}"
+                                UseGrouping="{TemplateBinding UseGrouping}"/>
                             <vki:DigitalNumberPresenter
                                 Value="{TemplateBinding Value}"
                                 DigitalFont="{TemplateBinding DigitalFont}"
@@ -112,7 +113,8 @@
                                 DecimalPlaceScale="{TemplateBinding DecimalPlaceScale}"
                                 PadZeroLeft="{TemplateBinding PadZeroLeft}"
                                 PadZeroRight="{TemplateBinding PadZeroRight}"
-                                MinusAlignLeft="{TemplateBinding MinusAlignLeft}"/>
+                                MinusAlignLeft="{TemplateBinding MinusAlignLeft}"
+                                UseGrouping="{TemplateBinding UseGrouping}"/>
                         </Grid>
                     </Border>
                 </ControlTemplate>

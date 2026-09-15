@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/Samples/">
+    <Project Path="Samples/AvaloniaSample/AvaloniaSample.csproj" Id="72663584-1aef-4884-8726-c83f20fc0d9b" />
+    <Project Path="Samples/BlazorWasmSample/BlazorWasmSample.csproj" />
+    <Project Path="Samples/MauiSample/MauiSample.csproj">
+      <Deploy />
+    </Project>
+    <Project Path="Samples/WindowsSample/WindowsSample.csproj" Id="5402fd60-1922-40a3-a489-71802225e73b" />
+  </Folder>
+  <Project Path="VagabondK.Indicators.Avalonia/VagabondK.Indicators.Avalonia.csproj" />
+  <Project Path="VagabondK.Indicators.Maui/VagabondK.Indicators.Maui.csproj" />
+  <Project Path="VagabondK.Indicators.Razor/VagabondK.Indicators.Razor.csproj" />
+  <Project Path="VagabondK.Indicators.Windows/VagabondK.Indicators.Windows.csproj" />
+  <Project Path="VagabondK.Indicators/VagabondK.Indicators.csproj" />
+</Solution>

@@ -18,6 +18,7 @@ namespace VagabondK.Indicators.Windows
             PadZeroLeftProperty = RegisterProperty(nameof(PadZeroLeft), typeof(bool), false, FrameworkPropertyMetadataOptions.AffectsRender);
             PadZeroRightProperty = RegisterProperty(nameof(PadZeroRight), typeof(bool), false, FrameworkPropertyMetadataOptions.AffectsRender);
             MinusAlignLeftProperty = RegisterProperty(nameof(MinusAlignLeft), typeof(bool), true, FrameworkPropertyMetadataOptions.AffectsRender);
+            UseGroupingProperty = RegisterProperty(nameof(UseGrouping), typeof(bool), false, FrameworkPropertyMetadataOptions.AffectsRender);
 
             DefaultStyleKeyProperty.OverrideMetadata(typeof(DigitalNumberPresenter), new FrameworkPropertyMetadata(typeof(DigitalNumberPresenter)));
         }
@@ -53,6 +54,10 @@ namespace VagabondK.Indicators.Windows
         /// MinusAlignLeft 종속성 속성의 식별자입니다.
         /// </summary>
         public static readonly DependencyProperty MinusAlignLeftProperty;
+        /// <summary>
+        /// UseGrouping 종속성 속성의 식별자입니다.
+        /// </summary>
+        public static readonly DependencyProperty UseGroupingProperty;
 
         /// <inheritdoc/>
         public int IntegerDigits { get => (int)GetValue(IntegerDigitsProperty); set => SetValue(IntegerDigitsProperty, value); }
@@ -68,6 +73,8 @@ namespace VagabondK.Indicators.Windows
         public bool PadZeroRight { get => (bool)GetValue(PadZeroRightProperty); set => SetValue(PadZeroRightProperty, value); }
         /// <inheritdoc/>
         public bool MinusAlignLeft { get => (bool)GetValue(MinusAlignLeftProperty); set => SetValue(MinusAlignLeftProperty, value); }
+        /// <inheritdoc/>
+        public bool UseGrouping { get => (bool)GetValue(UseGroupingProperty); set => SetValue(UseGroupingProperty, value); }
 
         /// <inheritdoc/>
         protected override Size MeasureOverride(Size availableSize)

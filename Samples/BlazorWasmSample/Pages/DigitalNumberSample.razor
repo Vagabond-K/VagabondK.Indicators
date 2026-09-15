@@ -9,12 +9,13 @@
 <SharedDigitalFontSegments DigitalFont="@font"/>
 
 <div style="display: flex;justify-content: flex-end;">
+    <MudSwitch @bind-Value="@useGrouping" Label="Use Grouping" Color="Color.Primary" UnCheckedColor="Color.Primary" />
     <MudSwitch @bind-Value="@glowEffect" Label="Glow Effect" Color="Color.Primary" UnCheckedColor="Color.Primary" />
     <MudButton Color="Color.Dark" EndIcon="@Icons.Material.Filled.SaveAlt" Variant="Variant.Filled" @onclick="ExportToSVG"><MudText Style="text-wrap-mode: nowrap">Export to SVG</MudText></MudButton>
 </div>
 
 <div style="display:flex;justify-content:center;align-items:center;height:250px;">
-    <DigitalNumber @ref="digitalNumber" Style="border-color:#404040;border-width:1px;border-style: dashed;" DigitalFont="@font" UseSharedSegments="true" Value="@value" ActiveStyle="@ActiveStyle" IntegerDigits="@integerDigits" DecimalPlaces="@decimalPlaces" DecimalSeparatorSize="@decimalSeparatorSize" DecimalPlaceScale="@decimalPlaceScale" Spacing="@spacing">
+    <DigitalNumber @ref="digitalNumber" Style="border-color:#404040;border-width:1px;border-style: dashed;" DigitalFont="@font" UseSharedSegments="true" Value="@value" ActiveStyle="@ActiveStyle" IntegerDigits="@integerDigits" DecimalPlaces="@decimalPlaces" DecimalSeparatorSize="@decimalSeparatorSize" DecimalPlaceScale="@decimalPlaceScale" Spacing="@spacing" UseGrouping="@useGrouping">
         <SvgDefs>
             @if (glowEffect)
             {
@@ -38,7 +39,7 @@
     <MudCardContent>
         <MudGrid>
             <MudItem xs="6"><MudSlider @bind-Value="integerDigits" TickMarks="true" Min="0" Max="29">Integer Digits: @integerDigits</MudSlider></MudItem>
-            <MudItem xs="3"><MudSlider @bind-Value="value" Min="-999" Max="1000" Step="0.0000000000000000000000000001">Value: @value.ToString("#0.###")</MudSlider></MudItem>
+            <MudItem xs="3"><MudSlider @bind-Value="value" Min="-9999" Max="10000" Step="0.0000000000000000000000000001">Value: @value.ToString("#0.###")</MudSlider></MudItem>
             <MudItem xs="3"><MudNumericField @bind-Value="value" Min="-999" Max="1000" Label="Value" Variant="Variant.Filled" Immediate="true" /></MudItem>
             <MudItem xs="6"><MudSlider @bind-Value="decimalPlaces" TickMarks="true" Min="0" Max="28">Decimal Places: @decimalPlaces</MudSlider></MudItem>
             <MudItem xs="6"><MudSlider @bind-Value="decimalPlaceScale" Min="0" Max="1" Step="0.001">Decimal Place Scale: @decimalPlaceScale.ToString("P1")</MudSlider></MudItem>
@@ -75,6 +76,7 @@
     private SevenSegmentFont font = new SevenSegmentFont() { Size = 100, SlantAngle = 10 };
 
     bool glowEffect = false;
+    bool useGrouping = false;
     private double value = -999;
     private int integerDigits = 5;
     private int decimalPlaces = 2;

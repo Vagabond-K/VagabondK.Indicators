@@ -40,6 +40,10 @@ namespace VagabondK.Indicators
         /// 마이너스 기호를 왼쪽 끝에 정렬할지 여부를 가져오거나 설정합니다.
         /// </summary>
         bool MinusAlignLeft { get; set; }
+        /// <summary>
+        /// 천 단위 그룹 사용 여부를 가져오거나 설정합니다. 사용하면 천 단위에 콤마가 표시됩니다.
+        /// </summary>
+        bool UseGrouping { get; set; }
     }
 
     /// <summary>
@@ -47,6 +51,8 @@ namespace VagabondK.Indicators
     /// </summary>
     public static class DigitalNumberExtentions
     {
+        private const int numberGroupSizes = 3;
+
         /// <summary>
         /// IDigitalNumber의 크기를 측정합니다.
         /// </summary>
@@ -68,9 +74,13 @@ namespace VagabondK.Indicators
             var spacing = indicator.Spacing.ToValidValue() * charWidth;
             var strokeThickness = 0d;
             var slantWidth = Math.Tan(slantAngle / 180 * Math.PI) * (charHeight + strokeThickness);
+            var useGrouping = indicator.UseGrouping;
 
             var integerDigitsSizeWidth = (charWidth + strokeThickness) * integerDigitCount + spacing * (integerDigitCount + 1);
             var integerDigitsSizeHeight = charHeight + spacing * 2 + strokeThickness;
+
+            if (useGrouping)
+                integerDigitsSizeWidth += (integerDigitCount - 1) / numberGroupSizes * separatorSize;
 
             var withoutDecimalPlaceWidth = integerDigitsSizeWidth + slantWidth;
             var decimalPlaceWidth = Math.Max(spacing + separatorSize + strokeThickness
@@ -105,8 +115,13 @@ namespace VagabondK.Indicators
             var strokeThickness = 0d;
             var halfStrokeThickness = strokeThickness / 2;
             var pitch = charWidth + strokeThickness + spacing;
-
+            var useGrouping = indicator.UseGrouping;
+            
             var integerDigitsSizeWidth = (charWidth + strokeThickness) * integerDigitCount + spacing * (integerDigitCount + 1);
+            var groupSeparatorCount = (integerDigitCount - 1) / numberGroupSizes;
+            if (useGrouping)
+                integerDigitsSizeWidth += groupSeparatorCount * separatorSize;
+
             var integerDigitsSizeHeight = charHeight + spacing * 2 + strokeThickness;
 
             var decimalPlacesTransform = Transform.CreateScaling(decimalPlaceScale)
@@ -162,6 +177,7 @@ namespace VagabondK.Indicators
                 }
             }
 
+            var slantX = -Math.Max(Math.Min(characterStyle.SlantAngle.ToValidValue(), 45), 0) / 180d * Math.PI;
 
             if (characterStyle.GetCharacterSegments(' ', DigitalSegmentFilter.InactiveOnly).Any(d => !d.Drawing.IsEmpty)
                 && decimalPlaceCount > 0
@@ -171,13 +187,30 @@ namespace VagabondK.Indicators
             {
                 var x = integerDigitsSizeWidth + (strokeThickness - spacing) / 2;
                 var y = integerDigitsSizeHeight - spacing - halfStrokeThickness - separatorSize;
-                var skew = Transform.CreateSkew(-Math.Max(Math.Min(characterStyle.SlantAngle.ToValidValue(), 45), 0) / 180d * Math.PI, 0, 0, y + separatorSize);
+                var skew = Transform.CreateSkew(slantX, 0, 0, y + separatorSize);
                 yield return Part.CreateEllipse(x, y, separatorSize, separatorSize, skew);
             }
 
+            var groupStart = integerDigitCount % numberGroupSizes;
+            if (useGrouping)
+                for (int i = groupStart; i < integerDigits.Length; i += numberGroupSizes)
+                {
+                    if (i == 0 || (!char.IsDigit(integerDigits[i - 1]) && segmentFilter != DigitalSegmentFilter.InactiveOnly)) continue;
+                    var x = halfStrokeThickness + pitch * i + ((i - groupStart) / numberGroupSizes - (i % numberGroupSizes == 0 ? 1 : 0)) * separatorSize + spacing / 2;
+                    var y = integerDigitsSizeHeight - spacing - halfStrokeThickness - separatorSize;
+                    var skew = Transform.CreateSkew(slantX, 0, 0, y + separatorSize);
+                    yield return Part.CreateComma(x, y, separatorSize, skew);
+                }
+
             for (int i = 0; i < integerDigits.Length; i++)
+            {
+                double totalGroupSeparators = 0;
+                if (useGrouping)
+                    totalGroupSeparators = (groupSeparatorCount - (integerDigitCount - 1 - i) / numberGroupSizes) * separatorSize;
                 foreach (var part in characterStyle.GetCharacterSegments(integerDigits[i], segmentFilter))
-                    yield return part * Transform.CreateTranslation(halfStrokeThickness + pitch * i + spacing, spacing + halfStrokeThickness);
+                    yield return part * Transform.CreateTranslation(halfStrokeThickness + pitch * i + spacing + totalGroupSeparators, spacing + halfStrokeThickness);
+            }
+
             if (decimalPlaceScale > 0)
                 for (int i = 0; i < decimalPlaces.Length; i++)
                     foreach (var part in characterStyle.GetCharacterSegments(decimalPlaces[i], segmentFilter))

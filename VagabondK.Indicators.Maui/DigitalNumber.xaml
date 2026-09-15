@@ -27,6 +27,7 @@
                     PadZeroLeft="{TemplateBinding PadZeroLeft}"
                     PadZeroRight="{TemplateBinding PadZeroRight}"
                     MinusAlignLeft="{TemplateBinding MinusAlignLeft}"
+                    UseGrouping="{TemplateBinding UseGrouping}"
                     Aspect="{TemplateBinding Aspect}"/>
                 <vki:DigitalNumberPresenter
                     Value="{TemplateBinding Value}"
@@ -47,6 +48,7 @@
                     PadZeroLeft="{TemplateBinding PadZeroLeft}"
                     PadZeroRight="{TemplateBinding PadZeroRight}"
                     MinusAlignLeft="{TemplateBinding MinusAlignLeft}"
+                    UseGrouping="{TemplateBinding UseGrouping}"
                     Aspect="{TemplateBinding Aspect}"/>
             </Grid>
         </ControlTemplate>

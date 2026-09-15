@@ -51,6 +51,8 @@ namespace VagabondK.Indicators
         public static Part operator *(in Transform transform, in Part part)
             => new Part(part.Drawing, transform * part.Transform);
 
+        static readonly double cpOffset = 2 * (Math.Sqrt(2) - 1) / 3;
+
         abstract class StaticPart<TPart> : PartDrawing where TPart : StaticPart<TPart>, new()
         {
             public static TPart Instance { get; } = new TPart();
@@ -72,7 +74,6 @@ namespace VagabondK.Indicators
 
         class BasicCircle : StaticPart<BasicCircle>
         {
-            static readonly double cpOffset = 2 * (Math.Sqrt(2) - 1) / 3;
             protected override void OnDraw(IPartDrawingContext context)
             {
                 if (context == null) return;
@@ -80,6 +81,22 @@ namespace VagabondK.Indicators
                 context.DrawCubicBezier(new Point(0, 0.5 - cpOffset), new Point(0.5 - cpOffset, 0), new Point(0.5, 0));
                 context.DrawCubicBezier(new Point(0.5 + cpOffset, 0), new Point(1d, 0.5 - cpOffset), new Point(1d, 0.5));
                 context.DrawCubicBezier(new Point(1d, 0.5 + cpOffset), new Point(0.5 + cpOffset, 1d), new Point(0.5, 1d));
+                context.DrawCubicBezier(new Point(0.5 - cpOffset, 1d), new Point(0, 0.5 + cpOffset), new Point(0, 0.5));
+                context.Close();
+            }
+        }
+
+        class BasicComma : StaticPart<BasicComma>
+        {
+            protected override void OnDraw(IPartDrawingContext context)
+            {
+                if (context == null) return;
+                context.BeginPath(new Point(0, 0.5));
+                context.DrawCubicBezier(new Point(0, 0.5 - cpOffset), new Point(0.5 - cpOffset, 0), new Point(0.5, 0));
+                context.DrawCubicBezier(new Point(0.5 + cpOffset, 0), new Point(1d, 0.5 - cpOffset), new Point(1d, 0.5));
+                context.DrawCubicBezier(new Point(1d, 1.6), new Point(cpOffset, 1.7), new Point(0, 1.7));
+                context.DrawLine(new Point(0, 1.5));
+                context.DrawCubicBezier(new Point(cpOffset, 1.5), new Point(0.5, 1 + cpOffset), new Point(0.5, 1));
                 context.DrawCubicBezier(new Point(0.5 - cpOffset, 1d), new Point(0, 0.5 + cpOffset), new Point(0, 0.5));
                 context.Close();
             }
@@ -143,5 +160,17 @@ namespace VagabondK.Indicators
         /// <returns>원형 파트</returns>
         public static Part CreateCircle(in Point centerPoint, in double radius, Transform transform)
             => CreateEllipse(centerPoint.X - radius, centerPoint.Y - radius, radius * 2, radius * 2, transform);
+
+        /// <summary>
+        /// 쉼표 파트를 생성합니다. 기본 크기는 1 × 1.7입니다.
+        /// </summary>
+        /// <param name="x">X 좌표</param>
+        /// <param name="y">Y 좌표</param>
+        /// <param name="scale">스케일</param>
+        /// <param name="transform">변환</param>
+        /// <returns>쉼표 파트</returns>
+        public static Part CreateComma(in double x, in double y, in double scale, Transform transform)
+            => new Part(BasicComma.Instance, Transform.CreateScaling(scale).Translate(x, y) * transform);
+
     }
 }

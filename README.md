@@ -5,6 +5,10 @@ Analog Indicator는 아직 못 만들었지만, 그래도 공유는 해 놓습�
 혹시나 필요하신 분은 얼마든지 가져다 쓰세요~  
 개발 과정과 기타 설명은 개인 [블로그 글](https://blog.naver.com/vagabond-k/223481454735)에 기록했습니다.
 
+- [Documentation](https://vagabond-k.github.io/docs/api/VagabondK.Indicators.html)
+
+[!["Buy me a soju"](https://vagabond-k.github.io/Images/buymeasoju131x36.png)](https://www.buymeacoffee.com/VagabondK)  
+
 ## 플랫폼별 구현
 - **[VagabondK.Indicators.Windows](https://www.nuget.org/packages/VagabondK.Indicators.Windows)** [![NuGet](https://img.shields.io/nuget/v/VagabondK.Indicators.Windows.svg)](https://www.nuget.org/packages/VagabondK.Indicators.Windows/) [![NuGet Downloads](https://img.shields.io/nuget/dt/VagabondK.Indicators.Windows.svg)](https://www.nuget.org/packages/VagabondK.Indicators.Windows/)  
 - **[VagabondK.Indicators.Razor](https://www.nuget.org/packages/VagabondK.Indicators.Razor)** [![NuGet](https://img.shields.io/nuget/v/VagabondK.Indicators.Razor.svg)](https://www.nuget.org/packages/VagabondK.Indicators.Razor/) [![NuGet Downloads](https://img.shields.io/nuget/dt/VagabondK.Indicators.Razor.svg)](https://www.nuget.org/packages/VagabondK.Indicators.Razor/)  

@@ -30,6 +30,9 @@ namespace VagabondK.Indicators.Razor
         /// <inheritdoc/>
         [Parameter]
         public bool MinusAlignLeft { get; set; } = true;
+        /// <inheritdoc/>
+        [Parameter]
+        public bool UseGrouping { get; set; }
 
         /// <summary>
         /// »ý¼ºÀÚ

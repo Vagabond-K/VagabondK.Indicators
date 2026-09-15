@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -412,6 +413,9 @@ namespace VagabondK.Indicators.DigitalFonts
         /// </summary>
         [DefaultValue(0.12)]
         public double Gap { get => gap; set => SetParameter(ref gap, value); }
+
+        /// <inheritdoc/>
+        public override IReadOnlyDictionary<char, long> DefaultBinaryCodes { get; } = new ReadOnlyDictionary<char, long>(binaryCodes);
 
         /// <summary>
         /// 현재 디지털 문자 양식에서 기본 제공하는 세그먼트 상태 이진 코드를 가져옵니다. 세그먼트 상태 순서는 LSB부터 시작됩니다.

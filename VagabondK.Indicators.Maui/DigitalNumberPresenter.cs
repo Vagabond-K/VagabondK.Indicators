@@ -20,6 +20,7 @@ namespace VagabondK.Indicators.Maui
             PadZeroLeftProperty = CreateProperty(nameof(PadZeroLeft), typeof(bool), false, OnVisualChanged);
             PadZeroRightProperty = CreateProperty(nameof(PadZeroRight), typeof(bool), false, OnVisualChanged);
             MinusAlignLeftProperty = CreateProperty(nameof(MinusAlignLeft), typeof(bool), true, OnVisualChanged);
+            UseGroupingProperty = CreateProperty(nameof(UseGrouping), typeof(bool), false, OnVisualChanged);
         }
 
         private static BindableProperty CreateProperty(string name, Type type, object defaultValue, BindableProperty.BindingPropertyChangedDelegate propertyChanged = null)
@@ -53,6 +54,10 @@ namespace VagabondK.Indicators.Maui
         /// MinusAlignLeft 바인딩 가능 속성의 식별자입니다.
         /// </summary>
         public static readonly BindableProperty MinusAlignLeftProperty;
+        /// <summary>
+        /// UseGrouping 바인딩 가능 속성의 식별자입니다.
+        /// </summary>
+        public static readonly BindableProperty UseGroupingProperty;
 
         /// <inheritdoc/>
         public int IntegerDigits { get => (int)GetValue(IntegerDigitsProperty); set => SetValue(IntegerDigitsProperty, value); }
@@ -68,6 +73,8 @@ namespace VagabondK.Indicators.Maui
         public bool PadZeroRight { get => (bool)GetValue(PadZeroRightProperty); set => SetValue(PadZeroRightProperty, value); }
         /// <inheritdoc/>
         public bool MinusAlignLeft { get => (bool)GetValue(MinusAlignLeftProperty); set => SetValue(MinusAlignLeftProperty, value); }
+        /// <inheritdoc/>
+        public bool UseGrouping { get => (bool)GetValue(UseGroupingProperty); set => SetValue(UseGroupingProperty, value); }
 
         /// <inheritdoc/>
         protected override Size GetIndicatorSize()

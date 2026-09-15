@@ -60,6 +60,12 @@ namespace VagabondK.Indicators.DigitalFonts
         public double Width { get => width; protected set => SetProperty(ref width, value); }
 
         /// <summary>
+        /// 현재 디지털 문자 양식에서 기본 제공하는 모든 문자들과 세그먼트 상태 이진 코드를 가져옵니다. 세그먼트 상태 순서는 LSB부터 시작됩니다.
+        /// </summary>
+        /// <returns>문자에 대한 세그먼트 상태 이진 코드 Dictionary</returns>
+        public abstract IReadOnlyDictionary<char, long> DefaultBinaryCodes { get; }
+
+        /// <summary>
         /// 대상 문자에 대한 세그먼트 상태 이진 코드를 가져옵니다. 세그먼트 상태 순서는 LSB부터 시작됩니다.
         /// </summary>
         /// <param name="character">문자</param>
@@ -78,6 +84,17 @@ namespace VagabondK.Indicators.DigitalFonts
         /// <param name="character">문자</param>
         /// <returns>세그먼트 상태 이진 코드</returns>
         protected abstract long GetDefaultBinaryCode(char character);
+
+        /// <summary>
+        /// 현재 디지털 문자 양식에 정의된 모든 문자들과 세그먼트 상태 이진 코드를 가져옵니다. 세그먼트 상태 순서는 LSB부터 시작되며, CustomBinaryCodes에 정의된 문자가 기본 제공 문자와 동일할 경우 CustomBinaryCodes에 정의된 상태 이진 코드를 가져오게 됩니다.
+        /// </summary>
+        /// <returns>모든 문자에 대한 세그먼트 상태 이진 코드 목록</returns>
+        public IEnumerable<KeyValuePair<char, long>> GetAllBinaryCodes()
+        {
+            foreach (var c in DefaultBinaryCodes.Keys.Union(CustomBinaryCodes.Keys).Distinct())
+                if (CustomBinaryCodes.TryGetValue(c, out var code) || DefaultBinaryCodes.TryGetValue(c, out code))
+                    yield return new KeyValuePair<char, long>(c, code);
+        }
 
         /// <summary>
         /// 파라미터들에 의해 정의된 해시가 파라미터 변경에 의해 무효화 되었을 때 호출됩니다.

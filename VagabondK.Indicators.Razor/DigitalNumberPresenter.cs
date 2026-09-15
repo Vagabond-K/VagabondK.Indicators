@@ -30,6 +30,9 @@ namespace VagabondK.Indicators.Razor
         /// <inheritdoc/>
         [Parameter]
         public bool MinusAlignLeft { get; set; }
+        /// <inheritdoc/>
+        [Parameter]
+        public bool UseGrouping { get; set; }
 
         /// <inheritdoc/>
         protected override Size Measure() => this.MeasureIndicator();

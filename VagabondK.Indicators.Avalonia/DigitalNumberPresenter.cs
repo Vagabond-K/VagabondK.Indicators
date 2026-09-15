@@ -17,6 +17,7 @@ namespace VagabondK.Indicators.Avalonia
             PadZeroLeftProperty.Changed.AddClassHandler<DigitalNumberPresenter>(OnVisualChanged);
             PadZeroRightProperty.Changed.AddClassHandler<DigitalNumberPresenter>(OnVisualChanged);
             MinusAlignLeftProperty.Changed.AddClassHandler<DigitalNumberPresenter>(OnVisualChanged);
+            UseGroupingProperty.Changed.AddClassHandler<DigitalNumberPresenter>(OnVisualChanged);
         }
 
         /// <summary>
@@ -47,6 +48,10 @@ namespace VagabondK.Indicators.Avalonia
         /// MinusAlignLeft 스타일드 속성의 식별자입니다.
         /// </summary>
         public static readonly StyledProperty<bool> MinusAlignLeftProperty = AvaloniaProperty.Register<DigitalNumberPresenter, bool>(nameof(MinusAlignLeft), true);
+        /// <summary>
+        /// UseGrouping 스타일드 속성의 식별자입니다.
+        /// </summary>
+        public static readonly StyledProperty<bool> UseGroupingProperty = AvaloniaProperty.Register<DigitalNumberPresenter, bool>(nameof(UseGrouping), false);
 
         /// <inheritdoc/>
         public int IntegerDigits { get => GetValue(IntegerDigitsProperty); set => SetValue(IntegerDigitsProperty, value); }
@@ -62,6 +67,8 @@ namespace VagabondK.Indicators.Avalonia
         public bool PadZeroRight { get => GetValue(PadZeroRightProperty); set => SetValue(PadZeroRightProperty, value); }
         /// <inheritdoc/>
         public bool MinusAlignLeft { get => GetValue(MinusAlignLeftProperty); set => SetValue(MinusAlignLeftProperty, value); }
+        /// <inheritdoc/>
+        public bool UseGrouping { get => GetValue(UseGroupingProperty); set => SetValue(UseGroupingProperty, value); }
 
         /// <inheritdoc/>
         protected override Size MeasureOverride(Size constraint)

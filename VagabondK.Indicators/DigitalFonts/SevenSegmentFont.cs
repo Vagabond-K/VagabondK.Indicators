@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -119,6 +120,9 @@ namespace VagabondK.Indicators.DigitalFonts
         /// </summary>
         [DefaultValue(0.4)]
         public double MiddleChamfer { get => middleChamfer; set => SetParameter(ref middleChamfer, value); }
+
+        /// <inheritdoc/>
+        public override IReadOnlyDictionary<char, long> DefaultBinaryCodes { get; } = new ReadOnlyDictionary<char, long>(binaryCodes.ToDictionary(item => item.Key, item => (long)item.Value));
 
         /// <summary>
         /// 디지털 문자 양식의 크기를 측정합니다.

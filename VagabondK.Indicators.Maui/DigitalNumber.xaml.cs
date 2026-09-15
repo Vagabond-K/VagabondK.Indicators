@@ -17,6 +17,7 @@ namespace VagabondK.Indicators.Maui
             PadZeroLeftProperty = CreateProperty(nameof(PadZeroLeft), typeof(bool), false);
             PadZeroRightProperty = CreateProperty(nameof(PadZeroRight), typeof(bool), false);
             MinusAlignLeftProperty = CreateProperty(nameof(MinusAlignLeft), typeof(bool), true);
+            UseGroupingProperty = CreateProperty(nameof(UseGrouping), typeof(bool), false);
             AspectProperty = CreateProperty(nameof(Aspect), typeof(Stretch), Stretch.None);
         }
         private static BindableProperty CreateProperty(string name, Type type, object defaultValue)
@@ -51,6 +52,10 @@ namespace VagabondK.Indicators.Maui
         /// </summary>
         public static readonly BindableProperty MinusAlignLeftProperty;
         /// <summary>
+        /// UseGrouping 바인딩 가능 속성의 식별자입니다.
+        /// </summary>
+        public static readonly BindableProperty UseGroupingProperty;
+        /// <summary>
         /// Aspect 바인딩 가능 속성의 식별자입니다.
         /// </summary>
         public static readonly BindableProperty AspectProperty;
@@ -69,6 +74,8 @@ namespace VagabondK.Indicators.Maui
         public bool PadZeroRight { get => (bool)GetValue(PadZeroRightProperty); set => SetValue(PadZeroRightProperty, value); }
         /// <inheritdoc/>
         public bool MinusAlignLeft { get => (bool)GetValue(MinusAlignLeftProperty); set => SetValue(MinusAlignLeftProperty, value); }
+        /// <inheritdoc/>
+        public bool UseGrouping { get => (bool)GetValue(UseGroupingProperty); set => SetValue(UseGroupingProperty, value); }
         /// <summary>
         /// 뷰 안을 채우기 위해 내용을 늘여야 하는 방법을 설명하는 값을 가져오거나 설정합니다.
         /// </summary>
