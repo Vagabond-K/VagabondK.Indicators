@@ -55,7 +55,7 @@ namespace VagabondK.Indicators.DigitalFonts
 
             { 'a', 0b1011111 },
             { 'b', 0b1111100 },
-            { 'c', 0b1011100 },
+            { 'c', 0b1011000 },
             { 'd', 0b1011110 },
             { 'e', 0b1111011 },
             { 'f', 0b1110001 },

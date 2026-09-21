@@ -91,9 +91,18 @@ namespace VagabondK.Indicators.DigitalFonts
         /// <returns>모든 문자에 대한 세그먼트 상태 이진 코드 목록</returns>
         public IEnumerable<KeyValuePair<char, long>> GetAllBinaryCodes()
         {
-            foreach (var c in DefaultBinaryCodes.Keys.Union(CustomBinaryCodes.Keys).Distinct())
-                if (CustomBinaryCodes.TryGetValue(c, out var code) || DefaultBinaryCodes.TryGetValue(c, out code))
-                    yield return new KeyValuePair<char, long>(c, code);
+            if (DefaultBinaryCodes != null && CustomBinaryCodes != null)
+            {
+                foreach (var c in DefaultBinaryCodes.Keys.Union(CustomBinaryCodes.Keys).Distinct())
+                    if (CustomBinaryCodes.TryGetValue(c, out var code) || DefaultBinaryCodes.TryGetValue(c, out code))
+                        yield return new KeyValuePair<char, long>(c, code);
+            }
+            else if (DefaultBinaryCodes != null)
+                foreach (var item in DefaultBinaryCodes)
+                    yield return item;
+            else if (CustomBinaryCodes != null)
+                foreach (var item in CustomBinaryCodes)
+                    yield return item;
         }
 
         /// <summary>
